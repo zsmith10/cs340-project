@@ -1,0 +1,76 @@
+        <div class="top-container">
+            <p id="welcome-message">BOAT MAINTENANCE</p>
+        </div>
+
+    <div class="table-container">
+        <table class="tables">
+
+            <th class="table-column"></th>
+            <th class="table-column"></th>
+
+            {{#each data.[0]}}
+            <th class="table-column">
+                {{@key}}
+            </th>
+            {{/each}}
+
+            {{#each data}}
+            <tr class="table-row">
+                <td class="table-column"><button onclick="window.location.href='/edit-invoices/{{this.invoice_id}}';">EDIT</button></td>
+                <td class="table-column"><button class="fa fa-remove" onclick='deleteInvoice({{this.invoice_id}})'>DELETE</button></td>
+                <td class="table-column">{{this.boat_maintenance_id}}</td>
+                <td class="table-column">{{this.boat_id}}</td>
+                <td class="table-column">{{this.maintenance_id}}</td>
+            </tr>
+            {{/each}}
+        </table>
+
+        <div class="change-data-btn-container">
+            <button id="add-button">Add Boat Maintenance</button>
+            <button id="change-button">Edit Boat Maintenance</button>
+        </div>
+    </div>
+
+    <div class="form-container" id="add-boat-modal"> 
+        <form class="BoatForm">
+            <legend id="boat-legend"><strong>ADD BOAT MAINTENANCE</strong></legend>
+                <fieldset class="fields">
+                    <div id="add-boat-text">
+                        <label>Boat ID</label> <input type="text" name="make">
+                    </div>
+                        
+                    <div id="add-boat-text">
+                        <label>Maintenance ID</label> <input type="text"  name="model">
+                    </div>
+                </fieldset>
+         
+            <div id="add-boat-btn-container">
+                <input class="btn" type="button" id="boat-form-btn" value="Add Boat Maintenance">
+                <input class="btn" type="button" id="boat-cancel-button" value="Cancel" >
+            </div>
+        </form> 
+    </div>
+
+    <div class="form-container" id="update-boat-modal"> 
+        <form class="BoatForm">
+            <legend id="boat-legend"><strong>UPDATE BOAT MAINTENANCE</strong></legend>
+                <fieldset class="fields">
+                    <div id="add-boat-text">
+                        <label>Boat Maintenance ID</label> <input type="text" name="boat_id">
+                    </div>
+
+                    <div id="add-boat-text">
+                        <label>Boat ID</label> <input type="text" name="make">
+                    </div>
+                        
+                    <div id="add-boat-text">
+                        <label>Maintenance ID</label> <input type="text"  name="model">
+                    </div>
+                </fieldset>
+          
+            <div id="add-boat-btn-container">
+                <input class="btn" type="submit" id="boat-form-btn" value="Update Boat Maintenance">
+                <input class="btn" type="button" id="edit-cancel" value="Cancel">
+            </div>
+        </form>     
+    </div>

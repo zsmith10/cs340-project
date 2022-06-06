@@ -115,15 +115,15 @@ VALUES  (1, 'Sam','Knox'),
         (3, 'Donny','Robertson');
 
 INSERT INTO `Boat_Maintenance` (`boat_maintenance_id`, `boat_id`, `maintenance_id`)
-VALUES  (1, 2,1),
-        (2, 1, 1),
-        (3, 3, 2),
+VALUES  (1, 1, 2),
+        (2, 2, 2),
+        (3, 3, 1),
         (4, 4, 3);
 
-INSERT INTO `Sales_Invoices` (`invoice_id`, `purchase_date`, `customer_id`, `sales_person_id`, `boat_id`, `price`)
-VALUES  (1, '2022-03-13', 1, 1, 1, 300000),
-        (2, '2022-04-02', 4, 2, 3, 537000),
-        (3, '2022-03-27', 2, 4, 2, 313000);
+INSERT INTO `Sales_Invoices` (`invoice_id`, `date`, `customer_id`, `sales_person_id`, `boat_id`, `price`)
+VALUES  (1, '2022-03-13', 1, 1, 1, 30000),
+        (2, '2022-04-02', 4, 2, 3, 53700),
+        (3, '2022-03-27', 2, 4, 2, 31300);
 
 
 
