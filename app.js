@@ -65,8 +65,36 @@ app.get('/maintenanceworkers', function(req, res)
 app.get('/invoices', function(req, res)
     {
         let query1 = "SELECT * FROM Sales_Invoices;";
+        let query2 = "SELECT * FROM Boats;";
+        let query3 = "SELECT * FROM Customers";
+        let query4 = "SELECT * FROM Sales_Person";
+
         db.pool.query(query1, function(error, rows, fields){
-            res.render('invoices.hbs' , {data: rows});
+
+            let invoices = rows;
+
+            db.pool.query(query2, (error, rows, fields) => {
+            
+                // Save the boats
+                let boats = rows;
+
+                db.pool.query(query3, (error, rows, fields) => {
+            
+                    // Save the customers
+                    let customers = rows;
+
+                    db.pool.query(query4, (error, rows, fields) => {
+            
+                        // Save the sales people
+                        let sales_person = rows;
+
+                        return res.render('invoices.hbs', {data: invoices, boats: boats, customers: customers, sales_person: sales_person});
+                           
+                    })
+                       
+                })
+                   
+            })
         })
 });
 
@@ -183,6 +211,94 @@ app.post('/add-customer-ajax', function(req, res)
         }
     })
 });
+
+app.post('/add-sales-person-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    console.log("sales person post called")
+    // Capture NULL values
+
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Sales_Person (sales_person_first_name, sales_person_last_name, commission) VALUES ('${data.sales_person_first_name}', '${data.sales_person_last_name}', ${data.commission})`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT * FROM Sales_Person;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+app.post('/add-maintenance-worker-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    console.log("maintenance worker post called")
+    // Capture NULL values
+
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Maintenance_Workers (maintenance_first_name, maintenance_last_name) VALUES ('${data.maintenance_first_name}', '${data.maintenance_last_name}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT * FROM Maintenance_Workers;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
 
 /*
      DELETE ROUTES

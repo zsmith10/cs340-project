@@ -153,6 +153,20 @@ ul.nav-bar li{
     margin-top: 20px;
 }
 
+.add-invoice-text{
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.invoice-select-box{
+    width: 200px;
+    height: 30px;
+}
+
 #add-boat-btn-container{
     height: 50px;
     margin-top: 25px;

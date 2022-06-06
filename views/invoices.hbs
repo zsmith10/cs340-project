@@ -40,34 +40,36 @@
         <form class="BoatForm">
             <legend id="boat-legend"><strong>ADD INVOICE</strong></legend>
                 <fieldset class="fields">
-                    <div id="add-boat-text">
-                        <label>Boat ID</label> <input type="text" name="boat_id">
+                    <div class="add-invoice-text">
+                        <label>Date</label> <input type="text" name="boat_id" class="invoice-select-box">
                     </div>
 
-                    <div id="add-boat-text">
-                        <label> Make </label> <input type="text" name="make">
-                    </div>
-                        
-                    <div id="add-boat-text">
-                        <label> Model </label> <input type="text"  name="model">
-                    </div>
-                        
-                    <div id="add-boat-text">
-                        <label> Year </label> <input type="text" name="year">
+                    <div class="add-invoice-text">
+                    <label>Customer</label><select class="invoice-select-box" name="input-customer" id="input-customer-ajax">
+                        <option value="">Select Customer</option>
+                        {{#each customers}}
+                         <option value="{{this.customer_id}}">{{this.customer_first_name}} {{this.customer_last_name}}</option>
+                        {{/each}}
+                    </select>
                     </div>
 
-                    <div id="add-boat-text">
-                        <label> Price </label> <input type="text" name="price">
+                    <div class="add-invoice-text">
+                    <label>Sales Person</label><select class="invoice-select-box" name="input-sales-person" id="input-sales-person-ajax">
+                        <option value="">Select Sales Person</option>
+                        {{#each sales_person}}
+                         <option value="{{this.sales_person_id}}">{{this.sales_person_first_name}} {{this.sales_person_last_name}}</option>
+                        {{/each}}
+                    </select>
                     </div>
 
-                    <div id="add-boat-text">
-                        <label> Date Serviced </label> <input type="text" name="date_serviced">
+                    <div class="add-invoice-text">
+                    <label>Boat</label><select class="invoice-select-box" name="input-sales-person" id="input-sales-person-ajax">
+                        <option value="">Select Boat</option>
+                        {{#each boats}}
+                         <option value="{{this.boat_id}}">{{this.year}} {{this.make}} {{this.model}} ${{this.price}}</option>
+                        {{/each}}
+                    </select>
                     </div>
-
-                    <div id="add-boat-text">
-                        <label> Serviced By </label> <input type="text" name="serviced_by">
-                    </div>
-
                 </fieldset>
          
             <div id="add-boat-btn-container">

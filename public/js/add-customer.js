@@ -154,7 +154,7 @@ addRowToTable = (data) => {
     row.appendChild(phoneCell);
     row.appendChild(emailCell);
 
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.customer_id);
     
     // Add the row to the table
     currentTable.appendChild(row);

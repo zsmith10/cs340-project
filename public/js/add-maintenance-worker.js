@@ -1,9 +1,9 @@
-let addSalesPersonForm = document.getElementById('add-sales-person-form-ajax');
+let addMaintenanceWorkerForm = document.getElementById('add-maintenance-worker-form-ajax');
 
 // Modify the objects we need
-addSalesPersonForm.addEventListener("submit", function (e) {
+addMaintenanceWorkerForm.addEventListener("submit", function (e) {
     
-    console.log("called add-sales-person.js")
+    console.log("called add-maintenance-worker-person.js")
     // Prevent the form from submitting
     e.preventDefault();
 
@@ -15,16 +15,18 @@ addSalesPersonForm.addEventListener("submit", function (e) {
     let FnameValue = inputFname.value;
     let LnameValue = inputLname.value;
 
+    console.log(FnameValue);
+    console.log(LnameValue);
+
     // Put our data we want to send in a javascript object
     let data = {
-        sales_person_first_name: FnameValue,
-        sales_person_last_name: LnameValue,
-        commission: 0
+        maintenance_first_name: FnameValue,
+        maintenance_last_name: LnameValue
     }
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/add-sales-person-ajax", true);
+    xhttp.open("POST", "/add-maintenance-worker-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -53,7 +55,7 @@ addSalesPersonForm.addEventListener("submit", function (e) {
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("sales-person-table");
+    let currentTable = document.getElementById("maintenance-worker-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -67,7 +69,6 @@ addRowToTable = (data) => {
     let idCell = document.createElement("TD");
     let fnameCell = document.createElement("TD");
     let lnameCell = document.createElement("TD");
-    let commissionCell = document.createElement("TD");
 
     let deleteCell = document.createElement("TD");
     let editCell = document.createElement("TD");
@@ -76,7 +77,6 @@ addRowToTable = (data) => {
     idCell.className = ("table-column");
     fnameCell.className = ("table-column");
     lnameCell.className = ("table-column");
-    commissionCell.className = ("table-column");
 
 
     editCell.className =("table-column");
@@ -97,10 +97,9 @@ addRowToTable = (data) => {
 */
     deleteCell.appendChild(deleteBtn);
 
-    idCell.innerText = newRow.sales_person_id;
-    fnameCell.innerText = newRow.sales_person_first_name;
-    lnameCell.innerText = newRow.sales_person_last_name;
-    commissionCell.innerText = newRow.commission;
+    idCell.innerText = newRow.maintenance_id;
+    fnameCell.innerText = newRow.maintenance_first_name;
+    lnameCell.innerText = newRow.maintenance_last_name;
 
     // Add the cells to the row 
 
@@ -110,7 +109,6 @@ addRowToTable = (data) => {
     row.appendChild(idCell);
     row.appendChild(fnameCell);
     row.appendChild(lnameCell);
-    row.appendChild(commissionCell);
 
     row.setAttribute('data-value', newRow.id);
     

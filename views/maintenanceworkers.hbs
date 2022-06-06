@@ -3,7 +3,7 @@
         </div>
 
     <div class="table-container">
-        <table class="tables">
+        <table class="tables" id="maintenance-worker-table">
 
             <th class="table-column"></th>
             <th class="table-column"></th>
@@ -33,45 +33,27 @@
     </div>
 
     <div class="form-container" id="add-boat-modal"> 
-        <form class="BoatForm">
+        <form class="BoatForm" id="add-maintenance-worker-form-ajax">
             <legend id="boat-legend"><strong>ADD MAINTENANCE WORKER</strong></legend>
                 <fieldset class="fields">
                     <div id="add-boat-text">
-                        <label>Boat ID</label> <input type="text" name="boat_id">
+                        <label>First Name</label> <input type="text" id="input-fname" name="boat_id">
                     </div>
 
                     <div id="add-boat-text">
-                        <label> Make </label> <input type="text" name="make">
-                    </div>
-                        
-                    <div id="add-boat-text">
-                        <label> Model </label> <input type="text"  name="model">
-                    </div>
-                        
-                    <div id="add-boat-text">
-                        <label> Year </label> <input type="text" name="year">
-                    </div>
-
-                    <div id="add-boat-text">
-                        <label> Price </label> <input type="text" name="price">
-                    </div>
-
-                    <div id="add-boat-text">
-                        <label> Date Serviced </label> <input type="text" name="date_serviced">
-                    </div>
-
-                    <div id="add-boat-text">
-                        <label> Serviced By </label> <input type="text" name="serviced_by">
+                        <label>Last Name</label> <input type="text" id="input-lname" name="make">
                     </div>
 
                 </fieldset>
          
             <div id="add-boat-btn-container">
-                <input class="btn" type="button" id="boat-form-btn" value="Add Maintenance Worker">
+                <input class="btn" type="submit" id="boat-form-btn" value="Add Maintenance Worker">
                 <input class="btn" type="button" id="boat-cancel-button" value="Cancel" >
             </div>
         </form> 
     </div>
+
+    <script src="./js/add-maintenance-worker.js"></script>
 
     <div class="form-container" id="update-boat-modal"> 
         <form class="BoatForm">
