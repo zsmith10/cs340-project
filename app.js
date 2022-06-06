@@ -89,11 +89,6 @@ app.post('/add-boat-ajax', function(req, res)
     let data = req.body;
 
     // Capture NULL values
-    let boat_id = parseInt(data.boat_id);
-    if (isNaN(boat_id))
-    {
-        boat_id = 'NULL'
-    }
 
     let year = parseInt(data.year);
     if (isNaN(year))
@@ -108,7 +103,7 @@ app.post('/add-boat-ajax', function(req, res)
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Boats (boat_id, make, model, year, price, date_serviced, serviced_by) VALUES (${data.boat_id}, '${data.make}', '${data.model}', ${data.year}, ${data.price}, '${data.date_serviced}','${data.serviced_by}')`;
+    query1 = `INSERT INTO Boats (make, model, year, price, date_serviced, serviced_by) VALUES ('${data.make}', '${data.model}', ${data.year}, ${data.price}, '${data.date_serviced}','${data.serviced_by}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -122,6 +117,54 @@ app.post('/add-boat-ajax', function(req, res)
         {
             // If there was no error, perform a SELECT * on bsg_people
             query2 = `SELECT * FROM Boats;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+app.post('/add-customer-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    console.log("customer post called")
+    // Capture NULL values
+    let zip = parseInt(data.zip);
+    if (isNaN(zip))
+    {
+        zip = 'NULL'
+    }
+
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Customers (customer_first_name, customer_last_name, address, city, state, zip, phone_number, email) VALUES ('${data.customer_first_name}', '${data.customer_last_name}', '${data.address}', '${data.city}', '${data.state}', ${data.zip},'${data.phone_number}','${data.email}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = `SELECT * FROM Customers;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400

@@ -1,5 +1,4 @@
-// Get the objects we need to modify
-let addBoatForm = document.getElementById('add-boat-form-ajax');
+let addBoatForm = document.getElementById('add-sales-people-form-ajax');
 
 // Modify the objects we need
 addBoatForm.addEventListener("submit", function (e) {
